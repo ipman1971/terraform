@@ -29,8 +29,9 @@ resource "openstack_networking_subnet_v2" "subnet_1" {
 
 # Creamos un router para conectar la red privada a donde corresponda
 resource "openstack_networking_router_v2" "router_1" {
-  name           = "router_1"
-  admin_state_up = "true"
+  name             = "router_1"
+  admin_state_up   = "true"
+  external_gateway = "${var.public_net}"
 }
 
 # Interface de red que asocia el router y la red privada
@@ -38,6 +39,12 @@ resource "openstack_networking_router_interface_v2" "router_interface_1" {
   router_id = "${openstack_networking_router_v2.router_1.id}"
   subnet_id = "${openstack_networking_subnet_v2.subnet_1.id}"
 }
+
+# Interface de red que asocia el router y la red public
+#resource "openstack_networking_router_interface_v2" "router_interface_2" {
+#  router_id = "${openstack_networking_router_v2.router_1.id}"
+#  subnet_id = "${var.public_net}"
+#}
 
 # Creamos reglas para ssh y http
 resource "openstack_compute_secgroup_v2" "web_cluster_secgroup" {
@@ -71,6 +78,10 @@ resource "openstack_compute_floatingip_v2" "floating_ip_1" {
   depends_on = ["openstack_networking_router_interface_v2.router_interface_1"]
 }
 
+resource "openstack_compute_floatingip_v2" "floatip_1" {
+  pool = "public"
+}
+
 #Creamos instancia de maquina
 resource "openstack_compute_instance_v2" "web_server" {
   name            = "web-server"
@@ -80,7 +91,7 @@ resource "openstack_compute_instance_v2" "web_server" {
   key_pair        = "${openstack_compute_keypair_v2.keys_1.name}"
   security_groups = ["${openstack_compute_secgroup_v2.web_cluster_secgroup.name}"]
 
-  #floating_ip     = "${openstack_compute_floatingip_v2.floating_ip_1.address}"
+  floating_ip = "${openstack_compute_floatingip_v2.floatip_1.address}"
 
   network {
     uuid           = "${openstack_networking_network_v2.net_1.id}"
@@ -88,16 +99,16 @@ resource "openstack_compute_instance_v2" "web_server" {
   }
 
   # Instalamos Nginx
-  #provisioner "remote-exec" {
-  #  connection {
-  #    user        = "${var.user_name}"
-  #    private_key = "${file(var.ssh_key_file)}"
-  #  }
+  provisioner "remote-exec" {
+    connection {
+      user        = "${var.user_instance}"
+      private_key = "${file(var.ssh_key_file)}"
+    }
 
-  #  inline = [
-  #    "sudo apt-get -y update",
-  #    "sudo apt-get -y install nginx",
-  #    "sudo service nginx start",
-  #  ]
-  #}
+    inline = [
+      "sudo apt-get -y update",
+      "sudo apt-get -y install nginx",
+      "sudo service nginx start",
+    ]
+  }
 }
