@@ -10,7 +10,7 @@ variable "user_name" {
 }
 
 variable "password" {
-  default = "devops"
+  default = "diamante"
 }
 
 variable "project" {
@@ -18,7 +18,7 @@ variable "project" {
 }
 
 variable "auth_url" {
-  default = "http://xxxxxxxxxx:5000/v2.0"
+  default = "http://javamaster.ovh:5000/v2.0"
 }
 
 # -----------------------------------------------------
