@@ -18,7 +18,7 @@ variable "project" {
 }
 
 variable "auth_url" {
-  default = "http://javamaster.ovh:5000/v2.0"
+  default = "http://xxxxxxxxxx:5000/v2.0"
 }
 
 # -----------------------------------------------------
