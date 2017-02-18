@@ -2,7 +2,7 @@
 # Openstack credentials
 # -----------------------------------------------------
 variable "image_selected" {
-  default = "68f83096-a234-4752-a18d-59994b37f19a"
+  default = "8ed72063-82ed-4608-a952-5abfbdf6683c"
 }
 
 variable "user_name" {
@@ -48,5 +48,10 @@ variable "pool" {
 }
 
 variable "public_net" {
-  default = "d6f707ab-bd2b-4beb-bec1-cc8b3a68e12b"
+  #default = "a5beae4c-fc69-4d8f-936f-d6feb9a56165"
+  default = "b7905a26-7ead-400e-bb9b-1240ef8dfdd6"
+}
+
+variable "lbass_ip" {
+  default = "10.0.10.253"
 }
