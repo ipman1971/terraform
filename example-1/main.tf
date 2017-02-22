@@ -9,7 +9,7 @@ provider "openstack" {
 }
 
 # -----------------------------------------------------
-# Definicion de claves para acceso a maquinas
+# Definicion de claves para acceso a la instancia
 # -----------------------------------------------------
 resource "openstack_compute_keypair_v2" "web-server-ssh-key" {
   name       = "web-server-ssh-key"
@@ -17,7 +17,7 @@ resource "openstack_compute_keypair_v2" "web-server-ssh-key" {
 }
 
 # -----------------------------------------------------
-# Red privada para las maquinas
+# Red privada para las instancia
 # -----------------------------------------------------
 resource "openstack_networking_network_v2" "web-server-private-net" {
   name           = "web-server-private-net"
@@ -116,9 +116,6 @@ resource "openstack_compute_instance_v2" "web-server" {
     access_network = true
   }
 
-  # -----------------------------------------------------
-  # Provision de Nginx
-  # -----------------------------------------------------
   user_data = <<-EOF
                   #!/bin/bash
                   echo "Hello, Terraform World" > index.html
