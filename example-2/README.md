@@ -14,3 +14,7 @@ En este laboratorio debemos conseguir los siguientes objetivos:
 ![](./images/example2-esquema-red.png)
 ![](./images/example2-topologia-red.png)
 ![](./images/example2-instancias.png)
+
+## Outputs
+Se debera mostrar la lista de ips de las máquinas que conforman el cluster
+![](./images/example2-outputs.png)
