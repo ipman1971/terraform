@@ -34,6 +34,10 @@ variable "flavor_name" {
   default = "ds512M"
 }
 
+variable "cluster_size" {
+  description = "Número de instancias que formaran el cluster"
+}
+
 # -----------------------------------------------------
 # Connection to world
 # -----------------------------------------------------
