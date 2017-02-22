@@ -83,15 +83,6 @@ resource "openstack_compute_secgroup_v2" "web-cluster-secgroup" {
 }
 
 # -----------------------------------------------------
-# Ip flotante
-# -----------------------------------------------------
-#resource "openstack_compute_floatingip_v2" "web-cluster-floatip" {
-#  count      = "${var.cluster_size}"
-#  pool       = "${var.pool}"
-#  depends_on = ["openstack_networking_router_interface_v2.web-cluster-router-interface"]
-#}
-
-# -----------------------------------------------------
 # Instancia de maquina web-server
 # -----------------------------------------------------
 resource "openstack_compute_instance_v2" "web-server" {
@@ -102,14 +93,10 @@ resource "openstack_compute_instance_v2" "web-server" {
   key_pair        = "${openstack_compute_keypair_v2.web-cluster-ssh-key.name}"
   security_groups = ["${openstack_compute_secgroup_v2.web-cluster-secgroup.name}"]
 
-  #  floating_ip     = "${element(openstack_compute_floatingip_v2.web-cluster-floatip.*.address,count.index)}"
-
   depends_on = ["openstack_compute_keypair_v2.web-cluster-ssh-key",
     "openstack_networking_subnet_v2.web-cluster-private-subnet",
     "openstack_compute_secgroup_v2.web-cluster-secgroup",
   ]
-
-  #    "openstack_compute_floatingip_v2.web-cluster-floatip",
 
   metadata {
     this = "web-cluster"
