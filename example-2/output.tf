@@ -1,6 +1,6 @@
 # -----------------------------------------------------
-# IP de web-server
+# IPs de web-cluster
 # -----------------------------------------------------
-output "web-server-ip" {
-  value = "${openstack_compute_instance_v2.web-server.access_ip_v4}"
+output "web-cluster-ip-list" {
+  value = ["${openstack_compute_instance_v2.web-server.*.access_ip_v4}"]
 }
