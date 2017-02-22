@@ -2,19 +2,17 @@
 # Openstack credentials
 # -----------------------------------------------------
 variable "image_selected" {
-  default = "8ed72063-82ed-4608-a952-5abfbdf6683c"
+  default = "1d3593f7-26ef-464e-9936-9fedce135e04"
 }
 
 variable "user_name" {
   default = "devops"
 }
 
-variable "password" {
-  default = "diamante"
-}
+variable "password" {}
 
 variable "project" {
-  default = "web-cluster"
+  default = "iac-dev"
 }
 
 variable "auth_url" {
@@ -29,15 +27,11 @@ variable "user_instance" {
 }
 
 variable "ssh_key_file" {
-  default = "key-pairs/devops-web-cluster.key"
+  default = "../key-pairs/instance.key"
 }
 
 variable "flavor_name" {
   default = "ds512M"
-}
-
-variable "cluster_size" {
-  default = "3"
 }
 
 # -----------------------------------------------------
@@ -48,10 +42,5 @@ variable "pool" {
 }
 
 variable "public_net" {
-  #default = "a5beae4c-fc69-4d8f-936f-d6feb9a56165"
-  default = "b7905a26-7ead-400e-bb9b-1240ef8dfdd6"
-}
-
-variable "lbass_ip" {
-  default = "10.0.10.253"
+  default = "4626acf5-0c3a-4900-916c-946e06a4ac06"
 }
