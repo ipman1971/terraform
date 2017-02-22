@@ -80,4 +80,4 @@ Definimos aqui todos los requisitos necesarios para poder realizar los laborator
 
 | ID    | Descripción |
 | :---: | :---        |
-| [example-1](./example- 1) | Creación de un web-server con ***ip privada*** e ***ip flotante*** |
+| [example-1](./example-1) | Creación de un web-server con ***ip privada*** e ***ip flotante*** |
