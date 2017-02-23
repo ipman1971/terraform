@@ -33,13 +33,13 @@ variable "region" {
 variable "avZ" {
   description = "zonas de disponibilidad de una region"
   type        = "list"
-  default     = ["zone-1", "zone-2", "zone-3"]
+  default     = ["nova"]
 }
 
-variable "instances_by_avZ" {
-  description = "numero de instancias por zona de disponibilidad"
-  default     = "2"
-}
+#variable "instances_by_avZ" {
+#  description = "numero de instancias por zona de disponibilidad"
+#  default     = "2"
+#}
 
 # -----------------------------------------------------
 # Access to instances
@@ -73,4 +73,11 @@ variable "pool" {
 variable "public_net" {
   description = "red de acceso publico"
   default     = "4626acf5-0c3a-4900-916c-946e06a4ac06"
+}
+
+# -----------------------------------------------------
+# Fichero plantilla para resultados
+# -----------------------------------------------------
+variable "datafile_template" {
+  default = "data.tpl"
 }
