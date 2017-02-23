@@ -36,11 +36,6 @@ variable "avZ" {
   default     = ["nova"]
 }
 
-#variable "instances_by_avZ" {
-#  description = "numero de instancias por zona de disponibilidad"
-#  default     = "2"
-#}
-
 # -----------------------------------------------------
 # Access to instances
 # -----------------------------------------------------
@@ -61,6 +56,7 @@ variable "flavor_name" {
 
 variable "cluster_size" {
   description = "Número de instancias que formaran el cluster"
+  default     = "3"
 }
 
 # -----------------------------------------------------
@@ -79,5 +75,5 @@ variable "public_net" {
 # Fichero plantilla para resultados
 # -----------------------------------------------------
 variable "datafile_template" {
-  default = "data.tpl"
+  default = "./template/data.yml.tpl"
 }

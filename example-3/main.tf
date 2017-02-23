@@ -106,7 +106,7 @@ resource "openstack_compute_instance_v2" "web-server" {
   ]
 
   metadata {
-    this = "web-cluster"
+    "component" = "web-server"
   }
 
   network {
@@ -122,18 +122,28 @@ resource "openstack_compute_instance_v2" "web-server" {
 }
 
 # -----------------------------------------------------
-# Fichero de resultados
+# Valores para template de resultados
 # -----------------------------------------------------
-data "template_file" "data_json" {
-  template = "${var.datafile_template}"
+data "template_file" "data_yml" {
+  template = "${file(var.datafile_template)}"
+  count    = "${var.cluster_size}"
 
   vars {
-    availability_zone_list = "${join(",",var.avZ)}"
-    cluster_size           = "${var.cluster_size}"
-    web-cluster_ip_list    = "${join(",",openstack_compute_instance_v2.web-server.*.access_ip_v4)}"
+    hostname      = "${element(openstack_compute_instance_v2.web-server.*.name,count.index)}"
+    region        = "${element(openstack_compute_instance_v2.web-server.*.region,count.index)}"
+    metadata      = "${element(openstack_compute_instance_v2.web-server.*.metadata.component,count.index)}"
+    flavor        = "${element(openstack_compute_instance_v2.web-server.*.flavor_name,count.index)}"
+    web-server-ip = "${element(openstack_compute_instance_v2.web-server.*.access_ip_v4,count.index)}"
   }
+}
+
+# -----------------------------------------------------
+# Fichero de resultados
+# -----------------------------------------------------
+resource "null_resource" "output_file" {
+  count = "${var.cluster_size}"
 
   provisioner "local-exec" {
-    command = "cat << EOF > ./data.json \n${template_file.data_json.rendered}"
+    command = "echo \"${element(data.template_file.data_yml.*.rendered,count.index)}\" >> data.yml"
   }
 }
