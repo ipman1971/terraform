@@ -82,3 +82,4 @@ Definimos aqui todos los requisitos necesarios para poder realizar los laborator
 | :---: | :---        |
 | [example-1](./example-1) | Creación de un web-server con ***ip privada*** e ***ip flotante*** |
 | [example-2](./example-2) | Creación de un cluster de webservers con ***ip privada*** cuyo número depende del párametro ***cluster_size*** |
+| [example-3](./example-3) | Creación de un cluster de webservers con ***ip privada*** cuyo número depende del párametro ***cluster_size*** asociadoa a una zona de disponibilidad y generando un fichero yml con información de las instancias creadas |
