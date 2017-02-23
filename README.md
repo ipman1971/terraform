@@ -65,7 +65,7 @@ SERVICE_PASSWORD=$ADMIN_PASSWORD
 ```
 11. Lanzar la instalación de devstack y esperar a que finalize
 ```bash
-./stack.
+./stack.sh
 ```
 12. Acceder a la consola de administración en [http://tu-ip-server/dashboard](http://tu-ip-server/dashboard)
 
